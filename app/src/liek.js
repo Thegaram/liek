@@ -1,13 +1,31 @@
 window.addEventListener('load', function() {
-    // Checking if Web3 has been injected by the browser (Mist/MetaMask)
-    if (typeof web3 !== 'undefined') {
-      window.web3 = new Web3(web3.currentProvider);
-    } else {
-      console.warn("No web3 detected. Falling back to http://127.0.0.1:9545. You should remove this fallback when you deploy live, as it's inherently insecure. Consider switching to Metamask for development. More info here: http://truffleframework.com/tutorials/truffle-and-metamask");
-    }
-  
-    App.start();
+  // Checking if Web3 has been injected by the browser (Mist/MetaMask)
+  if (typeof web3 !== 'undefined') {
+    window.web3 = new Web3(web3.currentProvider);
+  } else {
+    console.warn("No web3 detected. Falling back to http://127.0.0.1:9545. You should remove this fallback when you deploy live, as it's inherently insecure. Consider switching to Metamask for development. More info here: http://truffleframework.com/tutorials/truffle-and-metamask");
+  }
+
+  App.start();
+
+  var domain = window.location.href;
+  var buttons = document.getElementsByClassName('liek');
+
+  Array.prototype.forEach.call(buttons, (button) => {
+    var id = button.getAttribute('data-liek-id');
+
+    button.onclick = () => App.liek(domain, id);
+
+    App.liekCount(domain, id , (error, result) => {
+      if (error) {
+        console.error(error);
+        return;
+      }
+
+      button.innerText = "liek - " + result;
+    });
   });
+});
 
 
 window.App = {
@@ -16,43 +34,50 @@ window.App = {
       var self = this;
 
       const abi = [{
-            "constant": true,
-            "inputs": [
-                {
-                    "name": "url",
-                    "type": "string"
-                }
-            ],
-            "name": "liekCount",
-            "outputs": [
-                {
-                    "name": "",
-                    "type": "uint64"
-                }
-            ],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "constant": false,
-            "inputs": [
-                {
-                    "name": "url",
-                    "type": "string"
-                }
-            ],
-            "name": "liek",
-            "outputs": [],
-            "payable": false,
-            "stateMutability": "nonpayable",
-            "type": "function"
-        }];
-      const address = "0x2bfef3122503fd1c71efb8d972d7e41311c6dfce";
+          "constant": true,
+          "inputs": [
+              {
+                  "name": "domain",
+                  "type": "string"
+              },
+              {
+                  "name": "id",
+                  "type": "string"
+              }
+          ],
+          "name": "liekCount",
+          "outputs": [
+              {
+                  "name": "",
+                  "type": "uint64"
+              }
+          ],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+      },
+      {
+          "constant": false,
+          "inputs": [
+              {
+                  "name": "domain",
+                  "type": "string"
+              },
+              {
+                  "name": "id",
+                  "type": "string"
+              }
+          ],
+          "name": "liek",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function"
+      }
+      ];
+
+      const address = '0x351e38ddc637a817a7898d707522806059b30e15';
       this.contract = web3.eth.contract(abi).at(address);
-  
-      // Bootstrap the DataStructure abstraction for Use.
-      //liek.setProvider(web3.currentProvider);
   
       // Get the initial account balance so it can be displayed.
       web3.eth.getAccounts(function(err, accs) {
@@ -68,15 +93,6 @@ window.App = {
 
         this.account = accs[0];
       });
-
-      this.liekCount(window.location.href, function (error, result){
-        if(error){
-            console.error(error);
-        }else{
-            var button = document.getElementById("liek-button");
-            button.value = "liek - " + result;
-        }
-      })
     },
 
     // todo
@@ -87,17 +103,16 @@ window.App = {
      * packages and enb
      */
 
-    liek: function() {
-        var url = window.location.href;          
-        
-        this.contract.liek.sendTransaction(url, {from:account, gas:600000}, function (error, result){
+    liek: function(domain, id) {
+        this.contract.liek.sendTransaction(domain, id, {from:account, gas:600000}, function (error, result){
             console.log(result);
             
         });
     }, 
   
-    liekCount: function(url, callback) {
-        this.contract.liekCount(url, callback);
+    liekCount: function(domain, id, callback) {
+        this.contract.liekCount(domain, id, callback);
     },  
 };
-  
+
+
