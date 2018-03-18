@@ -59,5 +59,9 @@ module.exports = {
         }
       }
     ]
+  },
+  // https://github.com/hapijs/joi/issues/665
+  node: {
+    net: 'empty'
   }
 }
