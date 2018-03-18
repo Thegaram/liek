@@ -2,5 +2,6 @@
 
 rm -rf ./bin
 mkdir bin 
-solc --bin -o ./bin/Liek.bin Liek.sol
-solc --abi -o ./bin/Liek.json Liek.sol
+solc --bin -o ./bin Liek.sol
+solc --abi -o ./bin Liek.sol
+mv ./bin/Liek.abi ./bin/Liek.json

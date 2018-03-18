@@ -24,13 +24,17 @@ window.addEventListener('load', function() {
         }
 
         button.onclick = () => {
-          App.liek(domain, id);
+          App.liek(domain, id, (error, result) => {
+            if (error) {
+              console.error(error);
+              return;
+            }
 
-          var currentCount = parseInt(button.innerText, 10);
-          var newCount = currentCount + 1;
-          button.innerText = newCount;
-
-          button.onclick = undefined;
+            var currentCount = parseInt(button.innerText, 10);
+            var newCount = currentCount + 1;
+            button.innerText = newCount;
+            button.onclick = undefined;
+          });
         };
       });
 
@@ -82,11 +86,8 @@ window.App = {
      * packages and enb
      */
 
-    liek: function(domain, id) {
-        this.contract.liek.sendTransaction(domain, id, {from:account, gas:600000}, function (error, result){
-            console.log(result);
-            
-        });
+    liek: function(domain, id, callback) {
+        this.contract.liek.sendTransaction(domain, id, {from:account, gas:600000}, callback);
     },
 
     liekCheck: function(domain, id, callback) {
