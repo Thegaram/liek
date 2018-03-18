@@ -52,72 +52,7 @@ window.App = {
     start: function(callback) {
       var self = this;
 
-      const abi = [{
-        "constant": true,
-        "inputs": [
-          {
-            "name": "domain",
-            "type": "string"
-          },
-          {
-            "name": "id",
-            "type": "string"
-          }
-        ],
-        "name": "liekCount",
-        "outputs": [
-          {
-            "name": "",
-            "type": "uint64"
-          }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-      },
-      {
-        "constant": true,
-        "inputs": [
-          {
-            "name": "domain",
-            "type": "string"
-          },
-          {
-            "name": "id",
-            "type": "string"
-          }
-        ],
-        "name": "liekCheck",
-        "outputs": [
-          {
-            "name": "",
-            "type": "bool"
-          }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-      },
-      {
-        "constant": false,
-        "inputs": [
-          {
-            "name": "domain",
-            "type": "string"
-          },
-          {
-            "name": "id",
-            "type": "string"
-          }
-        ],
-        "name": "liek",
-        "outputs": [],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "function"
-      }
-    ];
-
+      const abi = require('../../contracts/bin/Liek.json');
       const address = '0x9bfa12b93299e4e75a812ac8957c0b8a9c3db164';
       this.contract = web3.eth.contract(abi).at(address);
   
