@@ -11,22 +11,25 @@ window.addEventListener('load', async () => {
   const buttons = document.getElementsByClassName(CLASS_NAME);
 
   Array.prototype.forEach.call(buttons, async (button) => {
+    const countDom = button.querySelector("#count");
+    const buttonDom = button.querySelector("#button");
     const id = button.getAttribute(ATTRIBUTE_NAME);
     const count = await app.liekCount(domain, id);
-    button.innerText = count;
+    countDom.innerText = count;
 
+    
     if (!app.isOnline())
       return;
 
     const hasLieked = await app.liekCheck(domain, id);
 
     if (!hasLieked) {
-      button.onclick = async () => {
+      buttonDom.onclick = async () => {
         await app.liek(domain, id);
-        const currentCount = parseInt(button.innerText, 10);
+        const currentCount = parseInt(countDom.innerText, 10);
         const newCount = currentCount + 1;
-        button.innerText = newCount;
-        button.onclick = undefined;
+        countDom.innerText = newCount;
+        buttonDom.onclick = undefined;
       };
     }
   });
