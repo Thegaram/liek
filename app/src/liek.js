@@ -1,7 +1,44 @@
-const ethereumRemote = require('ethereumjs-remote');
-
 const CLASS_NAME = 'liek';
 const ATTRIBUTE_NAME = 'data-liek-id';
+
+function encodeString(str) {
+  var utf8 = unescape(encodeURIComponent(str));
+
+  var arr = [];
+  for (var i = 0; i < utf8.length; i++) {
+      arr.push(utf8.charCodeAt(i).toString(16));
+  }
+
+  var enc = utf8.length.toString(16).padStart(64, "0") + arr.join("");
+  return enc.padEnd(enc.length + 64 - (enc.length % 64), "0");
+}
+
+function encodeLiekCountCall(domain, id) {
+  return `0x13d3812f00000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000080${encodeString(domain)}${encodeString(id)}`;
+}
+
+function encodeLiekCountRequestBody(to, data, id) {
+  return JSON.stringify({
+    jsonrpc: "2.0",
+    method: "eth_call",
+    params: [{
+        to,
+        data
+      },
+      "latest"
+    ],
+    id
+  });
+}
+
+function performLiekCountRequest(url, address, domain, id) {
+  return fetch(url, {
+    method: 'POST',
+    body: encodeLiekCountRequestBody(address, encodeLiekCountCall(domain, id), 1)
+  })
+  .then(res => res.json())
+  .then(res => parseInt(res.result, 16));
+}
 
 window.addEventListener('load', async () => {
   const app = new App();
@@ -104,14 +141,7 @@ class App {
       });
     }
 
-    return ethereumRemote.call({
-      contractAddress: this.address,
-      abi: this.abi,
-      functionName: 'liekCount',
-      functionArguments: [domain, id],
-      provider: 'https://ropsten.infura.io/xfPSeLdlrTJqPuH7bdWj'
-    })
-    .then(result => parseInt(result, 16));
+    return performLiekCountRequest('https://ropsten.infura.io/xfPSeLdlrTJqPuH7bdWj', this.address, domain, id);
   }
 
 }
