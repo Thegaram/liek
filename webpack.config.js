@@ -5,8 +5,8 @@ const MinifyPlugin = require("babel-minify-webpack-plugin");
 
 module.exports = {
   entry: {
-    "liek": "./app/src/liek.js",
-    "liek.min": "./app/src/liek.js",
+    "liek": ['babel-polyfill', "./app/src/liek.js"],
+    "liek.min": ['babel-polyfill', "./app/src/liek.js"],
   },
   output: {
     path: path.resolve(__dirname, 'build'),
