@@ -72,6 +72,8 @@ window.addEventListener('load', async () => {
 
     button_div.innerText = "liek";
     info_div.innerText = "i";  
+
+    
     
     const id = button.getAttribute(ATTRIBUTE_NAME);
     const count = await app.liekCount(domain, id);
