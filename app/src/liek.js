@@ -48,27 +48,50 @@ window.addEventListener('load', async () => {
   const buttons = document.getElementsByClassName(CLASS_NAME);
 
   Array.prototype.forEach.call(buttons, async (button) => {
-    const countDom = button.querySelector("#count");
-    const buttonDom = button.querySelector("#button");
+    
+    var top_div = document.createElement('div');
+    var count_div = document.createElement('div');
+    var bottom_div = document.createElement('div');
+    var button_div = document.createElement('div');
+    var info_div = document.createElement('div');
+
+    button.appendChild(top_div);
+    button.appendChild(bottom_div);
+
+    top_div.appendChild(count_div);
+
+    bottom_div.appendChild(button_div);
+    bottom_div.appendChild(info_div);
+
+    top_div.id = "top";
+    count_div.id = "count";
+
+    bottom_div.id = "bottom";
+    button_div.id = "button";
+    info_div.id = "info";
+
+    button_div.innerText = "liek";
+    info_div.innerText = "i";  
+    
     const id = button.getAttribute(ATTRIBUTE_NAME);
     const count = await app.liekCount(domain, id);
-    countDom.innerText = count;
+    count_div.innerText = count;
 
-    
     if (!app.isOnline())
       return;
 
     const hasLieked = await app.liekCheck(domain, id);
 
     if (!hasLieked) {
-      buttonDom.onclick = async () => {
+      button_div.onclick = async () => {
         await app.liek(domain, id);
-        const currentCount = parseInt(countDom.innerText, 10);
+        const currentCount = parseInt(count_div.innerText, 10);
         const newCount = currentCount + 1;
-        countDom.innerText = newCount;
-        buttonDom.onclick = undefined;
+        count_div.innerText = newCount;
+        button_div.onclick = undefined;
       };
-    }
+    }   
+
   });
 });
 
