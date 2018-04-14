@@ -6,7 +6,8 @@
     "build": "./node_modules/.bin/webpack --progress",
     "build:prod": "./node_modules/.bin/webpack -p --progress",
     "dev": "./node_modules/.bin/webpack-dev-server",
-    "build:sol": "cd contracts; ./build.sh"
+    "build:sol": "cd contracts; ./build.sh",
+    "lint": "./node_modules/.bin/eslint src/liek.js"
   },
   "author": "liek",
   "license": "liek",
@@ -17,6 +18,7 @@
     "babel-regenerator-runtime": "^6.5.0",
     "clean-webpack-plugin": "^0.1.19",
     "copy-webpack-plugin": "^4.5.1",
+    "eslint": "^4.19.1",
     "webpack": "^4.5.0",
     "webpack-cli": "^2.0.14",
     "webpack-dev-server": "^3.1.3"

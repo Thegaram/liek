@@ -6,11 +6,11 @@ function encodeString(str) {
 
   var arr = [];
   for (var i = 0; i < utf8.length; i++) {
-      arr.push(utf8.charCodeAt(i).toString(16));
+    arr.push(utf8.charCodeAt(i).toString(16));
   }
 
-  var enc = utf8.length.toString(16).padStart(64, "0") + arr.join("");
-  return enc.padEnd(enc.length + 64 - (enc.length % 64), "0");
+  var enc = utf8.length.toString(16).padStart(64, '0') + arr.join('');
+  return enc.padEnd(enc.length + 64 - (enc.length % 64), '0');
 }
 
 function encodeLiekCountCall(domain, id) {
@@ -19,13 +19,13 @@ function encodeLiekCountCall(domain, id) {
 
 function encodeLiekCountRequestBody(to, data, id) {
   return JSON.stringify({
-    jsonrpc: "2.0",
-    method: "eth_call",
+    jsonrpc: '2.0',
+    method: 'eth_call',
     params: [{
         to,
         data
       },
-      "latest"
+      'latest'
     ],
     id
   });
@@ -63,15 +63,15 @@ window.addEventListener('load', async () => {
     bottom_div.appendChild(button_div);
     bottom_div.appendChild(info_div);
 
-    top_div.id = "top";
-    count_div.id = "count";
+    top_div.id = 'top';
+    count_div.id = 'count';
 
-    bottom_div.id = "bottom";
-    button_div.id = "button";
-    info_div.id = "info";
+    bottom_div.id = 'bottom';
+    button_div.id = 'button';
+    info_div.id = 'info';
 
-    button_div.innerText = "liek";
-    info_div.innerText = "i";
+    button_div.innerText = 'liek';
+    info_div.innerText = 'i';
 
 
     const id = button.getAttribute(ATTRIBUTE_NAME);
