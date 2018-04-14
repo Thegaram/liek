@@ -5,9 +5,10 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
   mode: 'none',
+  devtool: 'source-map',
 
   entry: {
-    liek: ['babel-polyfill', './src/liek.js']
+    liek: ['babel-regenerator-runtime', './src/liek.js']
   },
 
   output: {
