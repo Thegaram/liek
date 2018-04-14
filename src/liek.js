@@ -1,5 +1,6 @@
 const CLASS_NAME = 'liek';
 const ATTRIBUTE_NAME = 'data-liek-id';
+const IPFS_ADDRESS = 'https://gateway.ipfs.io/ipfs/QmSTYq8NGsFzKCx39tc3eB7P4y8Efix6BcN3dZAzgDuyTo';
 
 function encodeString(str) {
   var utf8 = unescape(encodeURIComponent(str));
@@ -73,6 +74,7 @@ window.addEventListener('load', async () => {
     button_div.innerText = 'liek';
     info_div.innerText = 'i';
 
+    info_div.onclick = () => window.location = IPFS_ADDRESS;
 
     const id = button.getAttribute(ATTRIBUTE_NAME);
     const count = await app.liekCount(domain, id);
