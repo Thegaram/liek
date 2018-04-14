@@ -1,45 +1,48 @@
 const path = require('path');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
-const MinifyPlugin = require("babel-minify-webpack-plugin");
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
+  mode: 'none',
+
   entry: {
-    "liek": ['babel-polyfill', "./app/src/liek.js"],
-    "liek.min": ['babel-polyfill', "./app/src/liek.js"],
+    liek: ['babel-polyfill', './src/liek.js']
   },
+
   output: {
-    path: path.resolve(__dirname, 'build'),
-    filename: "[name].js"
+    path: path.resolve(__dirname, 'dist'),
+    filename: './[name].js'
   },
+
   plugins: [
-    // Copy our app's index.html to the build folder.
+    new CleanWebpackPlugin(['dist']),
     new CopyWebpackPlugin([
-      { from: './app/index.html', to: "index.html" }
-    ]),
-    new MinifyPlugin({}, {
-      include: /\.min\.js$/
-    })
+      { from: './src/index.html', to: "./index.html" },
+      { from: './src/liek.css', to: "./liek.css" }
+    ])
   ],
+
+  devServer: {
+    contentBase: path.resolve(__dirname, "dist"),
+    open: true,
+    port: 8081,
+    compress: true
+  },
+
   module: {
     rules: [
       {
         test: /\.js$/,
+        include: /src/,
+        exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
           options: {
             presets: ['env']
           }
         }
       }
-    ],
-    loaders: [
-      { test: /\.json$/, use: 'json-loader' },
-      { test: /\.css$/, use: 'css-loader'},
     ]
-  },
-  // https://github.com/hapijs/joi/issues/665
-  node: {
-    net: 'empty'
   }
-}
+};

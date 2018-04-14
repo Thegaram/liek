@@ -48,7 +48,7 @@ window.addEventListener('load', async () => {
   const buttons = document.getElementsByClassName(CLASS_NAME);
 
   Array.prototype.forEach.call(buttons, async (button) => {
-    
+
     var top_div = document.createElement('div');
     var count_div = document.createElement('div');
     var bottom_div = document.createElement('div');
@@ -71,10 +71,9 @@ window.addEventListener('load', async () => {
     info_div.id = "info";
 
     button_div.innerText = "liek";
-    info_div.innerText = "i";  
+    info_div.innerText = "i";
 
-    
-    
+
     const id = button.getAttribute(ATTRIBUTE_NAME);
     const count = await app.liekCount(domain, id);
     count_div.innerText = count;
@@ -92,7 +91,7 @@ window.addEventListener('load', async () => {
         count_div.innerText = newCount;
         button_div.onclick = undefined;
       };
-    }   
+    }
 
   });
 });
@@ -100,7 +99,7 @@ window.addEventListener('load', async () => {
 class App {
 
   async initialize() {
-    this.abi = require('../../contracts/bin/Liek.json');
+    this.abi = require('../contracts/bin/Liek.json');
     this.address = '0x9bfa12b93299e4e75a812ac8957c0b8a9c3db164';
 
     // check if Web3 has been injected by the browser (Mist/MetaMask)
