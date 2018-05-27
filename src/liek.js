@@ -2,21 +2,23 @@ const CLASS_NAME = 'liek';
 const ATTRIBUTE_NAME = 'data-liek-id';
 const IPFS_ADDRESS = 'https://gateway.ipfs.io/ipfs/QmSTYq8NGsFzKCx39tc3eB7P4y8Efix6BcN3dZAzgDuyTo';
 
-function encodeString(str) {
-  var utf8 = unescape(encodeURIComponent(str));
+const ethereumAbi = require('ethereumjs-abi');
 
-  var arr = [];
-  for (var i = 0; i < utf8.length; i++) {
-    arr.push(utf8.charCodeAt(i).toString(16));
-  }
+// function encodeString(str) {
+//   var utf8 = unescape(encodeURIComponent(str));
 
-  var enc = utf8.length.toString(16).padStart(64, '0') + arr.join('');
-  return enc.padEnd(enc.length + 64 - (enc.length % 64), '0');
-}
+//   var arr = [];
+//   for (var i = 0; i < utf8.length; i++) {
+//     arr.push(utf8.charCodeAt(i).toString(16));
+//   }
 
-function encodeLiekCountCall(domain, id) {
-  return `0x13d3812f00000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000080${encodeString(domain)}${encodeString(id)}`;
-}
+//   var enc = utf8.length.toString(16).padStart(64, '0') + arr.join('');
+//   return enc.padEnd(enc.length + 64 - (enc.length % 64), '0');
+// }
+
+// function encodeLiekCountCall(domain, id) {
+//   return `0x13d3812f00000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000080${encodeString(domain)}${encodeString(id)}`;
+// }
 
 function encodeLiekCountRequestBody(to, data, id) {
   return JSON.stringify({
@@ -32,10 +34,12 @@ function encodeLiekCountRequestBody(to, data, id) {
   });
 }
 
-function performLiekCountRequest(url, address, domain, id) {
+function performLiekCountRequest(abi, url, address, domain, id) {
+  const data = '0x' + ethereumAbi.simpleEncode('liekCount(string,string):(uint64)', domain, id).toString('hex');
   return fetch(url, {
     method: 'POST',
-    body: encodeLiekCountRequestBody(address, encodeLiekCountCall(domain, id), 1)
+    // body: encodeLiekCountRequestBody(address, encodeLiekCountCall(domain, id), 1)
+    body: encodeLiekCountRequestBody(address, data, 1)
   })
   .then(res => res.json())
   .then(res => parseInt(res.result, 16));
@@ -167,7 +171,7 @@ class App {
       });
     }
 
-    return performLiekCountRequest('https://ropsten.infura.io/xfPSeLdlrTJqPuH7bdWj', this.address, domain, id);
+    return performLiekCountRequest(this.abi, 'https://ropsten.infura.io/xfPSeLdlrTJqPuH7bdWj', this.address, domain, id);
   }
 
 }
