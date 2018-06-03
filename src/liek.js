@@ -1,6 +1,6 @@
 const CLASS_NAME = 'liek';
 const ATTRIBUTE_NAME = 'data-liek-id';
-const IPFS_ADDRESS = 'https://gateway.ipfs.io/ipfs/QmSTYq8NGsFzKCx39tc3eB7P4y8Efix6BcN3dZAzgDuyTo';
+const IPFS_ADDRESS = 'http://liek.io';
 
 const ethereumAbi = require('ethereumjs-abi');
 
@@ -54,35 +54,39 @@ window.addEventListener('load', async () => {
 
   Array.prototype.forEach.call(buttons, async (button) => {
 
-    var top_div = document.createElement('div');
-    var count_div = document.createElement('div');
-    var bottom_div = document.createElement('div');
-    var button_div = document.createElement('div');
-    var info_div = document.createElement('div');
-
-    button.appendChild(top_div);
-    button.appendChild(bottom_div);
-
-    top_div.appendChild(count_div);
-
-    bottom_div.appendChild(button_div);
-    bottom_div.appendChild(info_div);
-
-    top_div.id = 'top';
-    count_div.id = 'count';
-
-    bottom_div.id = 'bottom';
-    button_div.id = 'button';
-    info_div.id = 'info';
-
-    button_div.innerText = 'liek';
-    info_div.innerText = 'i';
-
-    info_div.onclick = () => window.location = IPFS_ADDRESS;
-
+    var svg = document.createElement('object');
+    svg.setAttribute("type", "image/svg+xml");
+    svg.setAttribute("data", "./liek.svg");
+    svg.setAttribute("width", "60px");
+    svg.setAttribute("height", "60px");
+    button.appendChild(svg);
+    
     const id = button.getAttribute(ATTRIBUTE_NAME);
     const count = await app.liekCount(domain, id);
-    count_div.innerText = count;
+    var liek_count_text = svg.contentDocument.getElementById("liek-count");
+    liek_count_text.innerHTML = count;
+
+    var liek_info = svg.contentDocument.getElementById("liek-info");
+    liek_info.onclick = () => window.location = IPFS_ADDRESS;
+
+    var liek_button = svg.contentDocument.getElementById("liek-button");
+
+    var circle_button = svg.contentDocument.getElementById("circle-button");
+    liek_button.onmouseenter = () => {
+      circle_button.setAttribute("style", "fill:#bfecff");
+      var hand = svg.contentDocument.getElementsByClassName("cls-5");
+      Array.prototype.forEach.call(hand, (segment) => segment.setAttribute("style", "stroke-width:2.7px;"))
+
+    }
+    liek_button.onmouseleave = () => {
+      circle_button.setAttribute("style", "fill:#ffffff");
+      var hand = svg.contentDocument.getElementsByClassName("cls-5");
+      Array.prototype.forEach.call(hand, (segment) => segment.setAttribute("style", "stroke-width:1.92px;"))
+    }
+
+    var circle_info = svg.contentDocument.getElementById("circle-info");
+    liek_info.onmouseenter = () => circle_info.setAttribute("style", "fill:#bfecff");
+    liek_info.onmouseleave = () => circle_info.setAttribute("style", "fill:#ffffff");
 
     if (!app.isOnline())
       return;
@@ -90,12 +94,12 @@ window.addEventListener('load', async () => {
     const hasLieked = await app.liekCheck(domain, id);
 
     if (!hasLieked) {
-      button_div.onclick = async () => {
+      liek_button.onclick = async () => {
         await app.liek(domain, id);
-        const currentCount = parseInt(count_div.innerText, 10);
+        const currentCount = parseInt(liek_count_text.innerHTML, 10);
         const newCount = currentCount + 1;
-        count_div.innerText = newCount;
-        button_div.onclick = undefined;
+        liek_count_text.innerHTML = newCount;
+        liek_button.onclick = undefined;
       };
     }
 

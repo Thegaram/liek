@@ -1,5 +1,5 @@
 .liek {
-    background-color: #D9B802;
+    
     color: white;
     text-align: center;
     text-decoration: none;
@@ -50,4 +50,8 @@
 
 .liek #bottom #info:hover{
     background-color: #C87000;
+}
+
+#liek-object #liek-info{
+    cursor: pointer;
 }

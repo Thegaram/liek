@@ -20,7 +20,8 @@ module.exports = {
     new CleanWebpackPlugin(['dist']),
     new CopyWebpackPlugin([
       { from: './src/index.html', to: "./index.html" },
-      { from: './src/liek.css', to: "./liek.css" }
+      { from: './src/liek.css', to: "./liek.css" },
+      { from: './svg/liek.svg', to: "./liek.svg" }
     ])
   ],
 

@@ -1,0 +1,110 @@
+<svg id="Layer_16" data-name="Layer 16" 
+    xmlns="http://www.w3.org/2000/svg" 
+    xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100">
+    <defs>
+        <style>
+            #circle-info{
+                transition: fill 0.5s;
+                animation-direction: alternate;
+            }
+            #circle-button{
+                transition: fill 0.5s;
+                animation-direction: alternate;
+            }
+            #liek-button{
+                cursor:pointer;                
+            }
+            #liek-info{
+                cursor:pointer;
+            }
+            .no-select{            
+                -webkit-touch-callout: none; /* iOS Safari */
+                -webkit-user-select: none; /* Safari */
+                -khtml-user-select: none; /* Konqueror HTML */
+                -moz-user-select: none; /* Firefox */
+                -ms-user-select: none; /* Internet Explorer/Edge */
+                user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+            }
+            .cls-1,.cls-5{
+                fill:none;
+            }
+            .cls-2{
+                clip-path:url(#clip-path);
+            }
+            .cls-3,.cls-9{
+                fill:#f5f5f5;
+            }
+            .cls-10,.cls-12,.cls-4,.cls-7{
+                fill:#3a9dc5;
+            }
+            .cls-5,.cls-9{
+                stroke:#3a9dc5;
+            }
+            .cls-5,.cls-7,.cls-9{
+                stroke-linecap:round;
+                stroke-miterlimit:10;
+                stroke-width:1.92px;
+            }
+            .cls-6{
+                clip-path:url(#clip-path-2);
+            }
+            .cls-7{
+                stroke:#fff;
+            }
+            .cls-8{
+                clip-path:url(#clip-path-3);
+            }
+            .cls-10{
+                font-size:27.17px;
+                letter-spacing:-2px;
+            }
+            .cls-10,.cls-12{
+                font-family:Avenir 85 Heavy;
+            }
+            .cls-11{
+                clip-path:url(#clip-path-4);
+            }
+            .cls-12{
+                font-size:16.06px;
+                letter-spacing:-1px;
+            }
+        </style>
+        <clipPath id="clip-path">
+            <circle class="cls-1" cx="47.02" cy="45.74" r="45.74"/>
+</clipPath>
+        <clipPath id="clip-path-2">
+            <circle class="cls-1" cx="84" cy="15.64" r="14.73"/>
+</clipPath>
+        <clipPath id="clip-path-3">
+            <circle class="cls-1" cx="84" cy="15.64" r="14.06"/>
+</clipPath>
+        <clipPath id="clip-path-4">
+            <rect class="cls-1" x="20.49" y="82.97" width="53.06" height="17.03" rx="8.51" ry="8.51"/>
+</clipPath>
+    </defs>
+    <title>liek</title>
+    <g id="liek-button" class="cls-2">
+        <path class="cls-3" d="M47,90.35A44.61,44.61,0,1,1,91.62,45.74,44.66,44.66,0,0,1,47,90.35Z"/>
+        <path class="cls-4" d="M47,2.1A43.65,43.65,0,1,1,3.37,45.74,43.65,43.65,0,0,1,47,2.1m0-1.92A45.57,45.57,0,1,0,92.58,45.74,45.62,45.62,0,0,0,47,.18h0Z"/>
+        <circle id="circle-button" class="cls-3" cx="47.02" cy="45.74" r="43.65"/>
+        <path class="cls-5" d="M41.28,59.58s2.25,3.67,4.52,2.43a3.83,3.83,0,0,0,1.63-5.16"/>
+        <path class="cls-5" d="M35.45,60.51S35,58.8,35.58,58s2.21-2.35,3.47-.48"/>
+        <path class="cls-5" d="M42.12,58.91a2.12,2.12,0,0,1,1.51-2.85,2.54,2.54,0,0,1,2.94,1"/>
+        <path class="cls-5" d="M39,41.56s-4.08-24.77-4.18-26.23-0.21-3.7,2.86-4,4,4,5.3,10.1,3.68,17.39,4.86,18.17,2,1.11,3-2.47,5.09-20.3,5.51-21.31,2.23-3.81,4.35-1.91,1.48,3.59.64,9.65-2.65,17-2.44,18.21,0.74,8.38,1.38,10.62,1.85,6,1.13,9.59c-0.8,4-2.54,14.55-4.81,16.06s-1.91,2.62-10.77,2.05S36.65,78.6,36,77.37c0,0-6.08-12.06-7.59-23,0.56-9,5.58-7.18,5.58-7.18s7,8.86,6.36,12.9-5,3-6.26-.11-1.9-3.14-1.9-3.14l-2.33-1.91"/>
+        <path class="cls-5" d="M60.25,56.06c-0.11-.34-2.12-3.14-2.86-4.94s-1.17-3.37-3-3.48-8.48-1-10.49,0a20.52,20.52,0,0,1-1.17-3.46,3.53,3.53,0,0,0-4.56-2.45C36.32,42.26,34,47.2,34,47.2"/>
+        <path class="cls-5" d="M42.12,48.09a5.06,5.06,0,0,0,1,4.94c2,2.69,7.26,3.65,9.59,1.4"/>
+        <path class="cls-5" d="M48.7,56.67a4.91,4.91,0,0,0,1.17,2A3.94,3.94,0,0,0,53.14,60"/>
+        <path class="cls-5" d="M48.34,48.09a1,1,0,0,1,0,1.46c-0.79.62-3.55,0.22-4.24-.39"/>
+</g>
+    <g class="cls-6">
+        <g id="liek-info" class="cls-8 no-select">
+            <circle id="circle-info" class="cls-9" cx="84" cy="15.64" r="12.76"/>
+            <text class="cls-10" transform="translate(80.32 25.22)">i</text>
+        </g>
+    </g>
+    <g class="cls-11 no-select">
+        <rect class="cls-9" x="21.74" y="83.37" width="50.56" height="16.23" rx="8.11" ry="8.11"/>
+        <text id="liek-count" transform="translate(33.39 97.42)" class="cls-12"></text>
+    </g>
+</svg>
